@@ -1,39 +1,30 @@
 package poo;
+//diseño de herencia: regla "es un"
+//para saber si el diseño de herencia escorrecta preguntate
+//esta "clase" es un(a) "superclase"
+//ejemplo este "carro" es un "vehiculo"
 
-import javax.swing.JOptionPane;
 
 public class Uso_vehiculo {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Carro renault=new Carro(); //INSTANCIAR UNA CLASE, EJEMPLAR DE CLASE
+		Carro micarro1=new Carro();
 		
-		//renault.ruedas=3;
-		renault.establece_color(JOptionPane.showInputDialog("introduce color"));//llamamos al metodo setter
+		micarro1.establece_color("Rojo");
 		
-		System.out.println(renault.dime_datos_generales());
+		Furgoneta mifurgoneta1=new Furgoneta(7, 580); //pide parametros
 		
-		System.out.println(renault.dime_color());
+		mifurgoneta1.establece_color("azul");//el metodo establececoloe se hereda de carro
 		
-		renault.configura_asientos(JOptionPane.showInputDialog("tiene asientos de cuero?"));
+		mifurgoneta1.configura_asientos("si");
 		
-		System.out.println(renault.dime_asientos());
+		mifurgoneta1.configura_climatizador("si");
 		
-		renault.configura_climatizador(JOptionPane.showInputDialog("tiene climatizador?"));
+		System.out.println(micarro1.dime_datos_generales() + " " + micarro1.dime_color()); 
+		// si no se añade el metodo y dejas solo el objeto aparece algo como esto poo.Carro@46daef40
 		
-		System.out.println(renault.dime_climatizador());
+		System.out.println(mifurgoneta1.dime_datos_generales()+ " " + mifurgoneta1.dimeDatosFurgoneta());
 		
-		System.out.println(renault.dime_peso_coche());
-		
-		System.out.println("el precio final es"+renault.precio_carro());
-		
-		
-		//System.out.println (renault.dime_largo());//obtenemos resultados con el getter
-		//System.out.println (renault.dime_color());
-		
-		/*System.out.println("Este carro tiene "+renault.ruedas+" ruedas");
-		JOptionPane.showMessageDialog(null, "Este carro tiene "+renault.ruedas+" ruedas");*/
-
 	}
 
 }
