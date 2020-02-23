@@ -19,10 +19,19 @@ public class Uso_empleado {
 		//podemos usar un objeto de la subclase, siempre y cuando esperemos un ojbeto de la superclase
 		misEmpleados[5]=new Jefatura("Maria", 95000, 1999, 5, 26);
 		
+		//casting de objetos (conversion de tipos)
+		Jefatura jefa_Finanzas=(Jefatura) misEmpleados[5];
+		
+		jefa_Finanzas.establecIncentivo(55000);
+	//si intentamos convertir a un empleado en jefe no funcionara debido a como es la herencia
+		
 		
 		/*for(int i=0;i<3;i++) {
 			misEmpleados[i].subeSueldo(5);
 		}*/
+		
+		
+		
 		
 		for(Empleado e: misEmpleados) {
 			e.subeSueldo(5);
@@ -84,7 +93,8 @@ class Empleado{
 		sueldo+=aumento;	
 	}
 }
-
+//final evita que una clase herede de otra
+//lo mismo se puede hacer con los metodos para evitar sobreescribir
 class Jefatura extends Empleado{
 	
 	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
@@ -103,3 +113,7 @@ class Jefatura extends Empleado{
 	
 	private double incentivo;
 }
+
+
+
+
