@@ -1,5 +1,7 @@
 package poo;
 import javax.swing.*;
+
+import java.awt.Toolkit;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.Timer;
@@ -12,6 +14,9 @@ public class PruebaTemporizador {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		DameLaHora oyente=new DameLaHora();//constructor por defecto
+		
+		//ActionListener oyente=new DameLaHora();
+		//otra forma y funcionara igual, y dame la hora es una clase que implementa la interfaz action listener
 		
 		//oyente es un evento (como en javascript) en vezde ser funcion es un objeto
 		Timer miTemporizador=new Timer(5000,oyente);
@@ -33,5 +38,8 @@ class DameLaHora implements ActionListener{
 		Date ahora=new Date();
 		
 		System.out.println("hora cada 5 segundos: "+ahora);
+		
+		Toolkit.getDefaultToolkit().beep();
+		
 	}
 }
