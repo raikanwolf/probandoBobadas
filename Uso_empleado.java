@@ -30,8 +30,24 @@ public class Uso_empleado {
 			misEmpleados[i].subeSueldo(5);
 		}*/
 		
+		/*//principio de sustitucion "es un" asi se le dice que es del tipo jefatura
+		Empleado director_comercial=new Jefatura ("Sandra",85000,2012,05,05);
+		//no se puede instanciar directamente pero si podemos decirle que es un empleado 
+		Comparable ejemplo=new Empleado ("Elisabeth",95,2011,06,07);
 		
+		if(director_comercial instanceof Empleado){
+			System.out.println("es de tipo Jefatura");
+		}
 		
+		if(ejemplo instanceof Empleado) {
+			System.out.println("implementa la interfaz comparable");
+		}*/
+		
+		System.out.println(jefa_Finanzas.tomar_decisiones("dar mas dias de vacaciones"));
+		
+		System.out.println("El jefe "+jefa_Finanzas.dameNombre() + "tienen un bonus de " + jefa_Finanzas.establece_bonus(500));
+		
+		System.out.println(misEmpleados[3].dameNombre()+" tiene un bonus de: "+misEmpleados[3].establece_bonus(200));
 		
 		for(Empleado e: misEmpleados) {
 			e.subeSueldo(5);
@@ -50,7 +66,8 @@ public class Uso_empleado {
 	}	
 }
 //le decimos que implemente la interfaz "comparable" significa que hay que incluir los metodos abstractos de la interfaz
-class Empleado implements Comparable {
+//NOTA: no se puede instanciar una interfaz
+class Empleado implements Comparable, Trabajadores {
 	private String nombre;
 	
 	private double sueldo;
@@ -61,6 +78,10 @@ class Empleado implements Comparable {
 	
 	private int Id;
 	
+	public double establece_bonus(double gratificacion) {
+		return Trabajadores.bonus_base+gratificacion;
+	}
+	
 	public Empleado (String nom, double suel, int agno, int mes, int dia){
 		nombre=nom;
 		sueldo=suel;
@@ -69,6 +90,7 @@ class Empleado implements Comparable {
 		++IdSiguiente;
 		Id=IdSiguiente;
 	}
+	
 	//compare to debe ser publico y abstracto, si no pones public se da por su puesto
 	//Pero una cosa es crear el metodo en la interfaz y otra cosa es sobreescribitlo en una clase
 	//Si lo sobreescribes en una clase alli si es necesario el public
@@ -90,6 +112,7 @@ class Empleado implements Comparable {
 		
 	}
 	
+	
 	public Empleado (String nom) {
 		//nombre=nom;
 		this(nom,30000,2000,01,01);
@@ -99,7 +122,7 @@ class Empleado implements Comparable {
 	}
 	
 	public String dameNombre(){//getter
-		return nombre + " " +Id;
+		return nombre + " " +"id "+Id;
 	}
 	
 	public double dameSuel(){//getter
@@ -119,10 +142,21 @@ class Empleado implements Comparable {
 }
 //final evita que una clase herede de otra
 //lo mismo se puede hacer con los metodos para evitar sobreescribir
-class Jefatura extends Empleado{
+//herencia multiple prohibida en java, pero puedes usar interfaces
+class Jefatura extends Empleado implements Jefes{
 	
 	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
 		super(nom, sue, agno, mes, dia); //dependiendo de que parametros le demos buscara a tal constructor
+	}
+	
+	public String tomar_decisiones (String decision){
+		
+		return "Un miembro de la direccion ha tomado la decision de:" + decision;
+	}
+	
+	public double establece_bonus(double gratificacion) {
+		double prima=2000;
+		return Trabajadores.bonus_base+gratificacion+prima;
 	}
 	
 	public void establecIncentivo (double b) {
