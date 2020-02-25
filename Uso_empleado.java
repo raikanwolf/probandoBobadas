@@ -37,6 +37,10 @@ public class Uso_empleado {
 			e.subeSueldo(5);
 		}
 		
+		//en la clase empleado hay que decirle que implemente la intefaz comparable.
+		//revisa Arrays (clase) en la api de java, sort es estatico
+		Arrays.sort(misEmpleados);
+		
 		for(Empleado e: misEmpleados) {
 			System.out.println("nombre: "+e.dameNombre()
 					+" sueldo: "+e.dameSuel()//se llamara al dame suel dependiendo de la clase alli esta el polimorfismo
@@ -45,8 +49,8 @@ public class Uso_empleado {
 		}
 	}	
 }
-
-class Empleado{
+//le decimos que implemente la interfaz "comparable" significa que hay que incluir los metodos abstractos de la interfaz
+class Empleado implements Comparable {
 	private String nombre;
 	
 	private double sueldo;
@@ -64,6 +68,26 @@ class Empleado{
 		altaContrato=calendario.getTime();
 		++IdSiguiente;
 		Id=IdSiguiente;
+	}
+	//compare to debe ser publico y abstracto, si no pones public se da por su puesto
+	//Pero una cosa es crear el metodo en la interfaz y otra cosa es sobreescribitlo en una clase
+	//Si lo sobreescribes en una clase alli si es necesario el public
+	//se esta sobreescribiendo el metodo
+	public int compareTo(Object miObjeto) {
+		//hacemos casting
+		Empleado otroEmpleado=(Empleado) miObjeto;
+
+		//this si este empleado
+		if(this.Id<otroEmpleado.Id) {//revisa la api sobre compare to
+			return -1;
+		}
+		
+		if(this.Id>otroEmpleado.Id) {
+			return 1;
+		}
+		
+		return 0;
+		
 	}
 	
 	public Empleado (String nom) {
